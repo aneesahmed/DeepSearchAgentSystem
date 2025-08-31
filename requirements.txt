@@ -1,0 +1,19 @@
+# File: requirements.txt
+# Core dependencies
+aiohttp>=3.8.0
+python-dotenv>=0.19.0
+requests>=2.28.0
+
+# Optional search providers
+duckduckgo-search>=3.8.0  # Fallback search provider
+
+# Development and testing
+pytest>=7.0.0
+pytest-asyncio>=0.21.0
+black>=22.0.0
+flake8>=5.0.0
+
+# Optional: Enhanced NLP capabilities
+# nltk>=3.8
+# spacy>=3.4.0
+# transformers>=4.20.0

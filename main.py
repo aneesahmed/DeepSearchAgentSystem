@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# File: main.py
 """
 Main script for running the Deep Research System.
 """
@@ -154,4 +155,44 @@ def check_environment():
     except ImportError:
         if missing_optional:
             print("❌ Error: No search providers available!")
-            print("   Either set an API key in .env
+            print("   Either set an API key in .env or install: pip install duckduckgo-search")
+            return False
+    
+    return True
+
+
+def main():
+    """Main entry point."""
+    setup_logging()
+    
+    if not check_environment():
+        sys.exit(1)
+    
+    import argparse
+    
+    parser = argparse.ArgumentParser(description="Deep Research System")
+    parser.add_argument("--query", "-q", type=str, help="Single query to research")
+    parser.add_argument("--test", action="store_true", help="Run test queries")
+    parser.add_argument("--interactive", "-i", action="store_true", help="Run in interactive mode")
+    
+    args = parser.parse_args()
+    
+    if args.query:
+        asyncio.run(run_single_query(args.query))
+    elif args.test:
+        asyncio.run(run_test_queries())
+    elif args.interactive:
+        asyncio.run(run_interactive_mode())
+    else:
+        print("🔍 Deep Research System")
+        print("=" * 30)
+        print("Usage:")
+        print("  python main.py --query 'Your research question'")
+        print("  python main.py --test")
+        print("  python main.py --interactive")
+        print()
+        print("For help: python main.py --help")
+
+
+if __name__ == "__main__":
+    main()
